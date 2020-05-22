@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\maksym\.Rider2019.3\config\scratches" t="IncludeRecursive" />
+    <e p="C:\Users\maksym\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\maksym\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_ParticipationMarker.1904821361.00" t="ExcludeRecursive" />
+    <e p="D:\Sources\ParticipationMarker\src\ParticipationMarker" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="ParticipationMarker.Domain" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Events" t="Include">
+          <e p="DeleteActionEvent.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="ParticipationMarker.Domain.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="ParticipationMarker.Domain.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="ParticipationMarker.FunctionApp" t="IncludeRecursive">
+        <e p=".gitignore" t="Include" />
+        <e p="bin\Debug\netcoreapp3.1\bin" t="ExcludeRecursive" />
+        <e p="BotWebHook.cs" t="Include" />
+        <e p="host.json" t="Include" />
+        <e p="local.settings.json" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="ParticipationMarker.FunctionApp.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="ParticipationMarker.FunctionApp.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="ParticipationMarker.sln" t="IncludeFlat" />
+      <e p="ParticipationMarker.TelegramBot" t="IncludeRecursive">
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="BotCommands.cs" t="Include" />
+        <e p="Extensions" t="Include">
+          <e p="UpdateMessageExtensions.cs" t="Include" />
+        </e>
+        <e p="InputParser.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="ParticipationMarker.TelegramBot.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="ParticipationMarker.TelegramBot.csproj" t="IncludeRecursive" />
+      </e>
+      <e p="Telegram.API" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Domain" t="Include">
+          <e p="Chat.cs" t="Include" />
+          <e p="Entity.cs" t="Include" />
+          <e p="From.cs" t="Include" />
+          <e p="Message.cs" t="Include" />
+          <e p="UpdateMessage.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Telegram.API.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Telegram.API.csproj" t="IncludeRecursive" />
+      </e>
+    </e>
+  </component>
+</project>
