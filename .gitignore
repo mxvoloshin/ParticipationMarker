@@ -1,8 +1,10 @@
-﻿/src/ParticipationMarker/ParticipationMarker.TelegramBot/bin/
-/src/ParticipationMarker/ParticipationMarker.TelegramBot/obj/
-/src/ParticipationMarker/ParticipationMarker.Domain/bin/
-/src/ParticipationMarker/ParticipationMarker.Domain/obj/
+﻿/src/ParticipationMarker/ParticipationMarker.App/bin/
+/src/ParticipationMarker/ParticipationMarker.App/obj/
+/src/ParticipationMarker/ParticipationMarker.Common/bin/
+/src/ParticipationMarker/ParticipationMarker.Common/obj/
 /src/ParticipationMarker/ParticipationMarker.FunctionApp/bin/
 /src/ParticipationMarker/ParticipationMarker.FunctionApp/obj/
+/src/ParticipationMarker/ParticipationMarker.Infrastructure/bin/
+/src/ParticipationMarker/ParticipationMarker.Infrastructure/obj/
 /src/ParticipationMarker/Telegram.API/bin/
 /src/ParticipationMarker/Telegram.API/obj/

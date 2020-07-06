@@ -2,7 +2,7 @@
 
 namespace Telegram.API.Domain
 {
-    public class Message
+    public class ReplyToMessage
     {
         [JsonProperty("message_id")]
         public long MessageId { get; set; }
@@ -18,14 +18,5 @@ namespace Telegram.API.Domain
 
         [JsonProperty("text")]
         public string Text { get; set; }
-
-        [JsonProperty("entities")]
-        public Entity[] Entities { get; set; }
-
-        [JsonProperty("reply_to_message")]
-        public ReplyToMessage ReplyToMessage { get; set; }
-
-        [JsonProperty("poll")]
-        public Poll Poll { get; set; }
     }
 }

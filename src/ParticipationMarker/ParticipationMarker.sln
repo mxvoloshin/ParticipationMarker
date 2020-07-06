@@ -1,12 +1,14 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticipationMarker.Domain", "ParticipationMarker.Domain\ParticipationMarker.Domain.csproj", "{4226F232-030E-4C3D-B4CD-02DE3721BC2C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticipationMarker.FunctionApp", "ParticipationMarker.FunctionApp\ParticipationMarker.FunctionApp.csproj", "{A33A8207-5BAD-421D-9788-B630DDBC5350}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticipationMarker.TelegramBot", "ParticipationMarker.TelegramBot\ParticipationMarker.TelegramBot.csproj", "{64E9C31B-2C0E-4F4E-933F-E507A57BC12A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Telegram.API", "Telegram.API\Telegram.API.csproj", "{66DA935A-4613-437F-A952-17FC8E55E107}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticipationMarker.Infrastructure", "ParticipationMarker.Infrastructure\ParticipationMarker.Infrastructure.csproj", "{74BEDF7D-42F0-4660-A633-E3D0A53C4B2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticipationMarker.Common", "ParticipationMarker.Common\ParticipationMarker.Common.csproj", "{D45CB005-3673-417B-962B-6055252BEF89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParticipationMarker.App", "ParticipationMarker.App\ParticipationMarker.App.csproj", "{EF0789C4-567F-4E4D-8B57-326A9519AB4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,21 +16,25 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{4226F232-030E-4C3D-B4CD-02DE3721BC2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4226F232-030E-4C3D-B4CD-02DE3721BC2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4226F232-030E-4C3D-B4CD-02DE3721BC2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4226F232-030E-4C3D-B4CD-02DE3721BC2C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A33A8207-5BAD-421D-9788-B630DDBC5350}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A33A8207-5BAD-421D-9788-B630DDBC5350}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A33A8207-5BAD-421D-9788-B630DDBC5350}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A33A8207-5BAD-421D-9788-B630DDBC5350}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64E9C31B-2C0E-4F4E-933F-E507A57BC12A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64E9C31B-2C0E-4F4E-933F-E507A57BC12A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64E9C31B-2C0E-4F4E-933F-E507A57BC12A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64E9C31B-2C0E-4F4E-933F-E507A57BC12A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{66DA935A-4613-437F-A952-17FC8E55E107}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{66DA935A-4613-437F-A952-17FC8E55E107}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66DA935A-4613-437F-A952-17FC8E55E107}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66DA935A-4613-437F-A952-17FC8E55E107}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74BEDF7D-42F0-4660-A633-E3D0A53C4B2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74BEDF7D-42F0-4660-A633-E3D0A53C4B2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74BEDF7D-42F0-4660-A633-E3D0A53C4B2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74BEDF7D-42F0-4660-A633-E3D0A53C4B2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D45CB005-3673-417B-962B-6055252BEF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D45CB005-3673-417B-962B-6055252BEF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D45CB005-3673-417B-962B-6055252BEF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D45CB005-3673-417B-962B-6055252BEF89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF0789C4-567F-4E4D-8B57-326A9519AB4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF0789C4-567F-4E4D-8B57-326A9519AB4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF0789C4-567F-4E4D-8B57-326A9519AB4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF0789C4-567F-4E4D-8B57-326A9519AB4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

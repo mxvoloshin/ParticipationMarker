@@ -2,7 +2,7 @@
 
 namespace Telegram.API.Domain
 {
-    public class From
+    public class User
     {
         [JsonProperty("id")]
         public long Id { get; set; }

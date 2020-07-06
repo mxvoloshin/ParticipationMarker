@@ -5,28 +5,43 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
-using ParticipationMarker.TelegramBot;
+using ParticipationMarker.App.TelegramBot;
 
 namespace ParticipationMarker.FunctionApp
 {
-    public static class BotWebHook
+    public class BotWebHook
     {
-        private const string botKey = "1070334956:AAEwa5k3bhOVJjOKOCV9ZU2uC7WwHJMIhHI";
-        
-        [FunctionName("BotWebHook")]
-        public static async Task<IActionResult> RunAsync(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]
-            HttpRequest req, ILogger log)
+        private readonly ITelegramInputParser _telegramInputParser;
+
+        public BotWebHook(ITelegramInputParser telegramInputParser)
         {
-            var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            log.LogInformation(requestBody);
-            
-            InputParser.ParseRequest(requestBody);
-            
-            return new OkObjectResult("WebHook is working");
+            _telegramInputParser = telegramInputParser;
+        }
+
+        [FunctionName("BotWebHook")]
+        public async Task<IActionResult> RunAsync(
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)]
+            HttpRequest req,
+            ILogger log)
+        {
+            try
+            {
+                var requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+                log.LogInformation(requestBody);
+
+                await _telegramInputParser.ParseRequestAsync(requestBody);
+
+                return new OkObjectResult("WebHook is working");
+            }
+            catch (Exception ex)
+            {
+                log.LogError("BotWebHook failed");
+                log.LogError(ex.Message);
+                log.LogError(ex.StackTrace);
+
+                return new OkObjectResult("WebHook is failed");
+            }
         }
     }
 }

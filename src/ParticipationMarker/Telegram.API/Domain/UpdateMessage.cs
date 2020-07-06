@@ -9,5 +9,11 @@ namespace Telegram.API.Domain
 
         [JsonProperty("message")]
         public Message Message { get; set; }
+
+        [JsonProperty("callback_query")]
+        public CallbackQuery CallbackQuery { get; set; }
+
+        [JsonProperty("poll_answer")]
+        public PollAnswer PollAnswer { get; set; }
     }
 }
