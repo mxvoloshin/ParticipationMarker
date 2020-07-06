@@ -6,10 +6,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ParticipationMarker.Domain\ParticipationMarker.Domain.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
       <PackageReference Include="Microsoft.Azure.Cosmos.Table" Version="1.0.7" />
     </ItemGroup>
 

@@ -6,7 +6,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\ParticipationMarker.Common\ParticipationMarker.Common.csproj" />
-      <ProjectReference Include="..\ParticipationMarker.Domain\ParticipationMarker.Domain.csproj" />
       <ProjectReference Include="..\ParticipationMarker.Infrastructure\ParticipationMarker.Infrastructure.csproj" />
       <ProjectReference Include="..\Telegram.API\Telegram.API.csproj" />
     </ItemGroup>

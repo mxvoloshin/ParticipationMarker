@@ -21,6 +21,5 @@
       <ProjectReference Include="..\ParticipationMarker.App\ParticipationMarker.App.csproj" />
       <ProjectReference Include="..\ParticipationMarker.Common\ParticipationMarker.Common.csproj" />
       <ProjectReference Include="..\ParticipationMarker.Infrastructure\ParticipationMarker.Infrastructure.csproj" />
-      <ProjectReference Include="..\ParticipationMarker.TelegramBot\ParticipationMarker.TelegramBot.csproj" />
     </ItemGroup>
 </Project>
