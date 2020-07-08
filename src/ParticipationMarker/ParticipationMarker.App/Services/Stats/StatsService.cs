@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ParticipationMarker.App.Domain;
 using ParticipationMarker.Infrastrucutre.Occasion;
 using ParticipationMarker.Infrastrucutre.Poll;
 using ParticipationMarker.Infrastrucutre.PollAnswer;
@@ -26,6 +28,73 @@ namespace ParticipationMarker.App.Services.Stats
         public async Task ShowAsync(UpdateMessage message)
         {
             var chatId = message.Message.Chat.Id;
+
+            var (pollsCount, chatMemberStats) = await GetStatAsync(chatId);
+            var displayTable = GetDisplayTable(pollsCount, chatMemberStats);
+            await _telegramClient.SendMessageAsync(new SendMessage
+            {
+                ChatId = chatId,
+                Text = displayTable,
+                ParseMode = "HTML"
+            });
+        }
+
+        public async Task<IEnumerable<ChatMemberStat>> GetChatStatAsync(string chatName)
+        {
+            var chatId = await GetChatIdAsync(chatName);
+            if (string.IsNullOrEmpty(chatId))
+            {
+                return Enumerable.Empty<ChatMemberStat>();
+            }
+
+            var result = await GetStatAsync(chatId);
+            return result.Item2;
+        }
+
+        private string GetDisplayTable(int pollsCount, IEnumerable<ChatMemberStat> memberStats)
+        {
+            var count = 1;
+            var displayTable = "<pre>";
+
+            displayTable += string.Format(Messages.StatsTotalOccasions, pollsCount);
+            displayTable += "\r\n------------------------------";
+
+            foreach (var memberStat in memberStats)
+            {
+                var userDisplay = $"{memberStat.FirstName} {memberStat.LastName}";
+                userDisplay = userDisplay.Trim();
+
+                displayTable += "\r\n" + string.Format(Messages.StatsForUser, count, memberStat.TotalVisited, memberStat.Percentage, userDisplay);
+                count++;
+            }
+
+            displayTable += "\r\n</pre>";
+            return displayTable;
+        }
+
+        private async Task<string> GetChatIdAsync(string chatName)
+        {
+            var chatIds = _occasionRepository.Find(x => x.ChatId != "").Select(x => x.PartitionKey).ToList().Distinct();
+
+            foreach (var chatId in chatIds)
+            {
+                var chatInfo = await _telegramClient.GetChatAsync(chatId);
+                if (chatInfo == null)
+                {
+                    continue;
+                }
+
+                if (string.Equals(chatInfo.Title, chatName, StringComparison.OrdinalIgnoreCase))
+                {
+                    return chatId;
+                }
+            }
+
+            return string.Empty;
+        }
+
+        private async Task<Tuple<int, IEnumerable<ChatMemberStat>> > GetStatAsync(string chatId)
+        {
             var occasions = _occasionRepository.GetByChatId(chatId);
             var polls = new List<PollEntity>();
             foreach (var occasionEntity in occasions)
@@ -41,7 +110,7 @@ namespace ParticipationMarker.App.Services.Stats
                     ChatId = chatId,
                     Text = Messages.NoOcassionsForStats,
                 });
-                return;
+                return new Tuple<int, IEnumerable<ChatMemberStat>>(0, Enumerable.Empty<ChatMemberStat>());
             }
 
             var answers = new List<PollAnswerEntity>();
@@ -51,27 +120,11 @@ namespace ParticipationMarker.App.Services.Stats
                 answers.AddRange(yesAnswers);
             }
 
-            var displayTable = await GetDisplayTableAsync(answers, polls.Count, chatId);
-            await _telegramClient.SendMessageAsync(new SendMessage
-            {
-                ChatId = chatId,
-                Text = displayTable,
-                ParseMode = "HTML"
-            });
-        }
-
-        private async Task<string> GetDisplayTableAsync(IEnumerable<PollAnswerEntity> answers, int pollsCount, string chatId)
-        {
             var answersByUser = answers.GroupBy(x => x.UserId)
                                        .ToDictionary(x => x.Key, y => y.Count())
                                        .OrderByDescending(x => x.Value);
 
-            var count = 1;
-            var displayTable = "<pre>";
-
-            displayTable += string.Format(Messages.StatsTotalOccasions, pollsCount);
-            displayTable += "\r\n------------------------------";
-
+            var result = new List<ChatMemberStat>();
             foreach (var kvp in answersByUser)
             {
                 var userInfo = await _telegramClient.GetChatMemberAsync(chatId, kvp.Key);
@@ -80,16 +133,17 @@ namespace ParticipationMarker.App.Services.Stats
                     continue;
                 }
 
-                var userDisplay = $"{userInfo.User.FirstName} {userInfo.User.LastName}";
-                userDisplay = userDisplay.Trim();
-                var percentage = (int) (((double) kvp.Value / (double) pollsCount) * 100);
-
-                displayTable += "\r\n" + string.Format(Messages.StatsForUser, count, kvp.Value, percentage, userDisplay);
-                count++;
+                var percentage = (int) (((double) kvp.Value / (double) polls.Count) * 100);
+                result.Add(new ChatMemberStat
+                {
+                    FirstName = userInfo.User.FirstName,
+                    LastName = userInfo.User.LastName,
+                    TotalVisited = kvp.Value,
+                    Percentage = percentage
+                });
             }
 
-            displayTable += "\r\n</pre>";
-            return displayTable;
+            return new Tuple<int, IEnumerable<ChatMemberStat>>(polls.Count, result);
         }
     }
 }

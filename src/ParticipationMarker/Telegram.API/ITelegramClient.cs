@@ -12,5 +12,6 @@ namespace Telegram.API
         Task<bool> IsAdminAsync(string chatId, string userId);
         Task AnswerCallbackQuery(AnswerCallbackQuery answerCallbackQuery);
         Task EditMessageText(EditMessageText message);
+        Task<Chat> GetChatAsync(string chatId);
     }
 }

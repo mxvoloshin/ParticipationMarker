@@ -141,6 +141,28 @@ namespace Telegram.API
             }
         }
 
+        public async Task<Chat> GetChatAsync(string chatId)
+        {
+            dynamic getChat = new JObject();
+            getChat.chat_id = chatId;
+
+            var httpContent = new StringContent(JsonConvert.SerializeObject(getChat, _ignoreNullSerializer),
+                Encoding.UTF8,
+                "application/json");
+            var responseMessage =
+                await _httpClient.PostAsync($"{_httpClient.BaseAddress}{_settings.BotKey}/getChat",
+                    httpContent);
+            var responseContent = await responseMessage.Content.ReadAsStringAsync();
+            if (!responseMessage.IsSuccessStatusCode)
+            {
+                // todo: how to handle errors?
+                _logger.LogError($"Failed {responseMessage.StatusCode} - {responseContent}");
+            }
+
+            var response = JsonConvert.DeserializeObject<ResponseChat>(responseContent);
+            return response.Ok ? response.Result : null;
+        }
+
         private async Task<List<ChatMember>> GetChatAdministratorsAsync(string chatId)
         {
             dynamic getChatAdministrators = new JObject();
