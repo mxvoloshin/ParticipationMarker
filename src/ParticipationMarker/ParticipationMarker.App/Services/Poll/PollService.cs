@@ -143,17 +143,28 @@ namespace ParticipationMarker.App.Services.Poll
                 return;
             }
 
-            var entity = new PollAnswerEntity
-            {
-                PartitionKey = pollEntity.ChatId,
-                RowKey = Guid.NewGuid().ToString(),
-                Timestamp = _dateTimeService.TableEntityTimeStamp,
-                PollId = pollId,
-                UserId = userId,
-                IsYesAnswer = isYesAnswer
-            };
+            var answer = _pollAnswerRepository.Find(x =>
+                x.PartitionKey == pollEntity.ChatId && x.PollId == pollId && x.UserId == userId).FirstOrDefault();
 
-            await _pollAnswerRepository.CreateAsync(entity);
+            if (answer == null)
+            {
+                answer = new PollAnswerEntity
+                {
+                    PartitionKey = pollEntity.ChatId,
+                    RowKey = Guid.NewGuid().ToString(),
+                    Timestamp = _dateTimeService.TableEntityTimeStamp,
+                    PollId = pollId,
+                    UserId = userId,
+                    IsYesAnswer = isYesAnswer
+                };
+            }
+            else
+            {
+                answer.Timestamp = _dateTimeService.TableEntityTimeStamp;
+                answer.IsYesAnswer = isYesAnswer;
+            }
+
+            await _pollAnswerRepository.CreateAsync(answer);
         }
     }
 }
