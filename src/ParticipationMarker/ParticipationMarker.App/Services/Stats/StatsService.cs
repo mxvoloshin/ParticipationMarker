@@ -127,17 +127,25 @@ namespace ParticipationMarker.App.Services.Stats
             var result = new List<ChatMemberStat>();
             foreach (var kvp in answersByUser)
             {
+                var firstName = string.Empty;
+                var lastName = string.Empty;
+
                 var userInfo = await _telegramClient.GetChatMemberAsync(chatId, kvp.Key);
                 if (userInfo == null)
                 {
-                    continue;
+                    firstName = kvp.Key;
+                }
+                else
+                {
+                    firstName = userInfo.User.FirstName;
+                    lastName = userInfo.User.LastName;
                 }
 
                 var percentage = (int) (((double) kvp.Value / (double) polls.Count) * 100);
                 result.Add(new ChatMemberStat
                 {
-                    FirstName = userInfo.User.FirstName,
-                    LastName = userInfo.User.LastName,
+                    FirstName = firstName,
+                    LastName = lastName,
                     TotalVisited = kvp.Value,
                     Percentage = percentage
                 });
